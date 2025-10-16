@@ -1,0 +1,30 @@
+.charts-container {
+  background: var(--card-background);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.charts-container h3 {
+  margin: 0 0 1.5rem 0;
+  color: var(--text-primary);
+}
+
+.chart-section {
+  margin-bottom: 2rem;
+}
+
+.chart-section h4 {
+  margin: 0 0 1rem 0;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.no-data {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 2rem;
+  background: var(--background);
+  border-radius: var(--border-radius);
+}

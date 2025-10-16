@@ -1,0 +1,87 @@
+.list-container {
+  background: var(--card-background);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.list-container h3 {
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.list-item {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  background: var(--background);
+  transition: var(--transition);
+}
+
+.list-item:hover {
+  background: var(--card-background);
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.description {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.amount {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.amount.income {
+  color: var(--secondary);
+}
+
+.amount.expense {
+  color: var(--danger);
+}
+
+.item-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.category {
+  font-style: italic;
+}
+
+.date {
+  opacity: 0.8;
+}
+
+.category-name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.empty-message {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 2rem;
+  margin: 0;
+}
