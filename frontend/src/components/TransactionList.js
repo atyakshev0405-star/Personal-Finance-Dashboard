@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import './List.css';
 
 function TransactionList({ transactions, categories, onUpdate }) {
@@ -9,6 +10,18 @@ function TransactionList({ transactions, categories, onUpdate }) {
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString();
+  };
+
+  const handleDelete = async (transactionId) => {
+    if (window.confirm('Are you sure you want to delete this transaction?')) {
+      try {
+        await axios.delete(`/transactions/${transactionId}`);
+        onUpdate();
+      } catch (error) {
+        console.error('Error deleting transaction:', error);
+        alert('Failed to delete transaction');
+      }
+    }
   };
 
   return (
@@ -29,7 +42,14 @@ function TransactionList({ transactions, categories, onUpdate }) {
                 </div>
                 <div className="item-details">
                   <span className="category">{getCategoryName(transaction.category_id)}</span>
+                  <span className={`type ${transaction.type}`}>
+                    {transaction.type.charAt(0).toUpperCase() + transaction.type.slice(1)}
+                  </span>
                   <span className="date">{formatDate(transaction.date)}</span>
+                  <div className="item-actions">
+                    <button className="edit-btn" onClick={() => alert('Edit functionality not implemented yet')}>Edit</button>
+                    <button className="delete-btn" onClick={() => handleDelete(transaction.id)}>Delete</button>
+                  </div>
                 </div>
               </div>
             </div>

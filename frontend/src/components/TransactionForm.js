@@ -62,10 +62,28 @@ function TransactionForm({ categories, onTransactionAdded }) {
           </div>
           <div className="form-group">
             <label>Type:</label>
-            <select name="type" value={formData.type} onChange={handleChange}>
-              <option value="expense">Expense</option>
-              <option value="income">Income</option>
-            </select>
+            <div className="radio-group">
+              <label className={`radio-button ${formData.type === 'expense' ? 'active' : ''}`}>
+                <input
+                  type="radio"
+                  name="type"
+                  value="expense"
+                  checked={formData.type === 'expense'}
+                  onChange={handleChange}
+                />
+                Expense
+              </label>
+              <label className={`radio-button ${formData.type === 'income' ? 'active' : ''}`}>
+                <input
+                  type="radio"
+                  name="type"
+                  value="income"
+                  checked={formData.type === 'income'}
+                  onChange={handleChange}
+                />
+                Income
+              </label>
+            </div>
           </div>
         </div>
 
