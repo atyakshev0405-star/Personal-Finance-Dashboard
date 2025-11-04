@@ -1,26 +1,14 @@
 .form-container {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2.5rem;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.form-container:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  background: var(--card-background);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
 }
 
 .form-container h3 {
-  margin: 0 0 1.5rem 0;
-  color: #2d3748;
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-align: center;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
 }
 
 .form {
@@ -30,8 +18,8 @@
 
 .form-row {
   display: flex;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .form-row .form-group {
@@ -39,67 +27,59 @@
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 0.75rem;
-  color: #4a5568;
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .form-group input,
 .form-group select {
   width: 100%;
-  padding: 1rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
   font-size: 1rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: rgba(255, 255, 255, 0.9);
-  color: #2d3748;
-  font-weight: 500;
+  transition: var(--transition);
+  background: var(--card-background);
+  color: var(--text-primary);
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #4facfe;
-  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
-  background: white;
+  border-color: var(--primary);
 }
 
 .form button {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: var(--primary);
   color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 600;
+  border: 2px solid var(--primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  align-self: center;
+  align-self: flex-start;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .form button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
 }
 
 .form button:active:not(:disabled) {
   transform: translateY(-1px) scale(0.98);
-  box-shadow: 0 2px 8px rgba(79, 172, 254, 0.3);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
 }
 
 .form button::before {
@@ -124,8 +104,6 @@
   opacity: 0.7;
   cursor: not-allowed;
   animation: pulse 1.5s ease-in-out infinite;
-  transform: none !important;
-  box-shadow: 0 2px 8px rgba(79, 172, 254, 0.2) !important;
 }
 
 @keyframes pulse {
@@ -138,28 +116,16 @@
 }
 
 .error {
-  color: #ff6b6b;
-  background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
-  padding: 1rem;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  border: 1px solid #fbb6ce;
-  font-weight: 500;
-  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.1);
+  color: #e74c3c;
+  background: #fdf2f2;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 768px) {
   .form-row {
     flex-direction: column;
     gap: 0;
-  }
-
-  .form-container {
-    padding: 1.5rem;
-  }
-
-  .form button {
-    width: 100%;
-    align-self: stretch;
   }
 }

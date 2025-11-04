@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from typing import List
 import pandas as pd
 from io import StringIO
-import models, database, auth, business_logic
+import models, database, auth
 from database import engine
 from pydantic import BaseModel
 
@@ -63,7 +63,6 @@ def get_transactions(current_user: models.User = Depends(auth.get_current_user),
 
 @app.post("/transactions")
 def create_transaction(transaction: TransactionCreate, current_user: models.User = Depends(auth.get_current_user), db: Session = Depends(database.get_db)):
-    business_logic.validate_transaction(transaction.amount, transaction.type, transaction.category_id, db)
     db_transaction = models.Transaction(**transaction.dict(), user_id=current_user.id)
     db.add(db_transaction)
     db.commit()
@@ -86,13 +85,29 @@ def create_category(category: CategoryCreate, current_user: models.User = Depend
 def import_csv(file: UploadFile = File(...), current_user: models.User = Depends(auth.get_current_user), db: Session = Depends(database.get_db)):
     contents = file.file.read().decode('utf-8')
     df = pd.read_csv(StringIO(contents))
-    business_logic.process_csv_import(df, current_user.id, db)
+    for _, row in df.iterrows():
+        transaction = models.Transaction(
+            amount=row['amount'],
+            description=row['description'],
+            type=row['type'],
+            category_id=row['category_id'],
+            user_id=current_user.id
+        )
+        db.add(transaction)
+    db.commit()
     return {"message": "CSV imported"}
 
 @app.get("/export-csv")
 def export_csv(current_user: models.User = Depends(auth.get_current_user), db: Session = Depends(database.get_db)):
     transactions = db.query(models.Transaction).filter(models.Transaction.user_id == current_user.id).all()
-    csv = business_logic.process_csv_export(transactions)
+    df = pd.DataFrame([{
+        'amount': t.amount,
+        'description': t.description,
+        'type': t.type,
+        'category_id': t.category_id,
+        'date': t.date
+    } for t in transactions])
+    csv = df.to_csv(index=False)
     return {"csv": csv}
 
 @app.get("/forecast")
@@ -104,9 +119,3 @@ def get_forecast(current_user: models.User = Depends(auth.get_current_user), db:
         return {"forecast": "Not enough data"}
     forecast = sum(amounts[-3:]) / 3
     return {"forecast": forecast}
-
-@app.get("/balance")
-def get_balance(current_user: models.User = Depends(auth.get_current_user), db: Session = Depends(database.get_db)):
-    transactions = db.query(models.Transaction).filter(models.Transaction.user_id == current_user.id).all()
-    balance = business_logic.calculate_balance(transactions)
-    return {"balance": balance}

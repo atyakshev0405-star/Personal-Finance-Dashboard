@@ -94,16 +94,6 @@ function Charts({ transactions, categories }) {
     },
   };
 
-  const pieChartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-    },
-    cutout: '50%', // Makes it a donut chart, reducing the circle size
-  };
-
   return (
     <div className="charts-container">
       <h3>Financial Charts</h3>
@@ -120,7 +110,7 @@ function Charts({ transactions, categories }) {
       <div className="chart-section">
         <h4>Expenses by Category</h4>
         {categoryTotals.length > 0 ? (
-          <Pie data={pieChartData} options={pieChartOptions} />
+          <Pie data={pieChartData} options={chartOptions} />
         ) : (
           <p className="no-data">No data available for category chart</p>
         )}

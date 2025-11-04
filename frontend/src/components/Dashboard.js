@@ -106,14 +106,14 @@ function Dashboard({ onLogout }) {
   };
 
   if (loading) {
-    return <div className="loading">Loading dashboard...</div>;
+    return <div className="loading">Загрузка дашборда...</div>;
   }
 
   return (
     <div className="dashboard">
       <header className="dashboard-header">
-        <h1>Personal Finance Dashboard</h1>
-        <button onClick={onLogout} className="logout-btn">Logout</button>
+        <h1>Личный финансовый дашборд</h1>
+        <button onClick={onLogout} className="logout-btn">Выйти</button>
       </header>
 
       <nav className="dashboard-nav">
@@ -121,37 +121,37 @@ function Dashboard({ onLogout }) {
           className={activeTab === 'overview' ? 'active' : ''}
           onClick={() => setActiveTab('overview')}
         >
-          Overview
+          Обзор
         </button>
         <button
           className={activeTab === 'transactions' ? 'active' : ''}
           onClick={() => setActiveTab('transactions')}
         >
-          Transactions
+          Транзакции
         </button>
         <button
           className={activeTab === 'categories' ? 'active' : ''}
           onClick={() => setActiveTab('categories')}
         >
-          Categories
+          Категории
         </button>
         <button
           className={activeTab === 'charts' ? 'active' : ''}
           onClick={() => setActiveTab('charts')}
         >
-          Charts
+          Графики
         </button>
         <button
           className={activeTab === 'forecast' ? 'active' : ''}
           onClick={() => setActiveTab('forecast')}
         >
-          Forecast
+          Прогноз
         </button>
         <button
           className={activeTab === 'import-export' ? 'active' : ''}
           onClick={() => setActiveTab('import-export')}
         >
-          Import/Export
+          Импорт/Экспорт
         </button>
       </nav>
 
@@ -160,20 +160,20 @@ function Dashboard({ onLogout }) {
           <div className="overview">
             <div className="quick-add-buttons">
               <button onClick={() => handleQuickAdd('income')} className="quick-add-btn income-btn">
-                + Add Income
+                + Добавить доход
               </button>
               <button onClick={() => handleQuickAdd('expense')} className="quick-add-btn expense-btn">
-                + Add Expense
+                + Добавить расход
               </button>
             </div>
 
             {showQuickAdd && (
               <div className="quick-add-form">
-                <h3>Add {quickAddType === 'income' ? 'Income' : 'Expense'}</h3>
+                <h3>Добавить {quickAddType === 'income' ? 'доход' : 'расход'}</h3>
                 <form onSubmit={handleQuickAddSubmit}>
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Amount:</label>
+                      <label>Сумма:</label>
                       <input
                         type="number"
                         name="amount"
@@ -184,14 +184,14 @@ function Dashboard({ onLogout }) {
                       />
                     </div>
                     <div className="form-group">
-                      <label>Category:</label>
+                      <label>Категория:</label>
                       <select
                         name="category_id"
                         value={quickAddData.category_id}
                         onChange={handleQuickAddChange}
                         required
                       >
-                        <option value="">Select Category</option>
+                        <option value="">Выберите категорию</option>
                         {categories.map(category => (
                           <option key={category.id} value={category.id}>
                             {category.name}
@@ -201,7 +201,7 @@ function Dashboard({ onLogout }) {
                     </div>
                   </div>
                   <div className="form-group">
-                    <label>Description:</label>
+                    <label>Описание:</label>
                     <input
                       type="text"
                       name="description"
@@ -213,10 +213,10 @@ function Dashboard({ onLogout }) {
                   {quickAddError && <div className="error">{quickAddError}</div>}
                   <div className="form-actions">
                     <button type="submit" disabled={quickAddLoading}>
-                      {quickAddLoading ? 'Adding...' : 'Add'}
+                      {quickAddLoading ? 'Добавление...' : 'Добавить'}
                     </button>
                     <button type="button" onClick={cancelQuickAdd} className="cancel-btn">
-                      Cancel
+                      Отмена
                     </button>
                   </div>
                 </form>
@@ -225,19 +225,19 @@ function Dashboard({ onLogout }) {
 
             <div className="stats-grid">
               <div className="stat-card">
-                <h3>Total Transactions</h3>
+                <h3>Всего транзакций</h3>
                 <p>{transactions.length}</p>
               </div>
               <div className="stat-card">
-                <h3>Total Income</h3>
+                <h3>Общий доход</h3>
                 <p>${transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0).toFixed(2)}</p>
               </div>
               <div className="stat-card">
-                <h3>Total Expenses</h3>
+                <h3>Общие расходы</h3>
                 <p>${transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0).toFixed(2)}</p>
               </div>
               <div className="stat-card">
-                <h3>Categories</h3>
+                <h3>Категории</h3>
                 <p>{categories.length}</p>
               </div>
             </div>
