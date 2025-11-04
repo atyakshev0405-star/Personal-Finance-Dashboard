@@ -1,0 +1,3 @@
+amount,description,type,category_id
+100.0,Test transaction,income,1
+50.0,Another transaction,expense,1
