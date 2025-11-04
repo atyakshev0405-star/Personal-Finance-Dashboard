@@ -85,13 +85,23 @@ function Charts({ transactions, categories }) {
     ],
   };
 
-  const chartOptions = {
+  const barChartOptions = {
     responsive: true,
     plugins: {
       legend: {
         position: 'top',
       },
     },
+  };
+
+  const pieChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+    },
+    cutout: '70%', // Makes it a donut chart, reducing the circle size
   };
 
   return (
@@ -101,7 +111,7 @@ function Charts({ transactions, categories }) {
       <div className="chart-section">
         <h4>Monthly Income vs Expenses</h4>
         {sortedMonths.length > 0 ? (
-          <Bar data={monthlyChartData} options={chartOptions} />
+          <Bar data={monthlyChartData} options={barChartOptions} />
         ) : (
           <p className="no-data">No data available for monthly chart</p>
         )}
@@ -110,7 +120,7 @@ function Charts({ transactions, categories }) {
       <div className="chart-section">
         <h4>Expenses by Category</h4>
         {categoryTotals.length > 0 ? (
-          <Pie data={pieChartData} options={chartOptions} />
+          <Pie data={pieChartData} options={pieChartOptions} />
         ) : (
           <p className="no-data">No data available for category chart</p>
         )}

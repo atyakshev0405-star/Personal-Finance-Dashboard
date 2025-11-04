@@ -7,3 +7,5 @@ python-multipart
 pytest
 httpx
 pydantic-settings
+psycopg2-binary
+pandas

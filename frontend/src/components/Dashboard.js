@@ -106,14 +106,24 @@ function Dashboard({ onLogout }) {
   };
 
   if (loading) {
-    return <div className="loading">Загрузка дашборда...</div>;
+    return <div className="loading">Loading dashboard...</div>;
   }
 
   return (
     <div className="dashboard">
+      <div className="animated-background">
+        <div className="floating-balls">
+          <div className="ball ball-1"></div>
+          <div className="ball ball-2"></div>
+          <div className="ball ball-3"></div>
+          <div className="ball ball-4"></div>
+          <div className="ball ball-5"></div>
+          <div className="ball ball-6"></div>
+        </div>
+      </div>
       <header className="dashboard-header">
-        <h1>Личный финансовый дашборд</h1>
-        <button onClick={onLogout} className="logout-btn">Выйти</button>
+        <h1>Personal Finance Dashboard</h1>
+        <button onClick={onLogout} className="logout-btn">Logout</button>
       </header>
 
       <nav className="dashboard-nav">
@@ -121,37 +131,37 @@ function Dashboard({ onLogout }) {
           className={activeTab === 'overview' ? 'active' : ''}
           onClick={() => setActiveTab('overview')}
         >
-          Обзор
+          Overview
         </button>
         <button
           className={activeTab === 'transactions' ? 'active' : ''}
           onClick={() => setActiveTab('transactions')}
         >
-          Транзакции
+          Transactions
         </button>
         <button
           className={activeTab === 'categories' ? 'active' : ''}
           onClick={() => setActiveTab('categories')}
         >
-          Категории
+          Categories
         </button>
         <button
           className={activeTab === 'charts' ? 'active' : ''}
           onClick={() => setActiveTab('charts')}
         >
-          Графики
+          Charts
         </button>
         <button
           className={activeTab === 'forecast' ? 'active' : ''}
           onClick={() => setActiveTab('forecast')}
         >
-          Прогноз
+          Forecast
         </button>
         <button
           className={activeTab === 'import-export' ? 'active' : ''}
           onClick={() => setActiveTab('import-export')}
         >
-          Импорт/Экспорт
+          Import/Export
         </button>
       </nav>
 
@@ -160,20 +170,20 @@ function Dashboard({ onLogout }) {
           <div className="overview">
             <div className="quick-add-buttons">
               <button onClick={() => handleQuickAdd('income')} className="quick-add-btn income-btn">
-                + Добавить доход
+                + Add Income
               </button>
               <button onClick={() => handleQuickAdd('expense')} className="quick-add-btn expense-btn">
-                + Добавить расход
+                + Add Expense
               </button>
             </div>
 
             {showQuickAdd && (
               <div className="quick-add-form">
-                <h3>Добавить {quickAddType === 'income' ? 'доход' : 'расход'}</h3>
+                <h3>Add {quickAddType === 'income' ? 'Income' : 'Expense'}</h3>
                 <form onSubmit={handleQuickAddSubmit}>
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Сумма:</label>
+                      <label>Amount:</label>
                       <input
                         type="number"
                         name="amount"
@@ -184,14 +194,14 @@ function Dashboard({ onLogout }) {
                       />
                     </div>
                     <div className="form-group">
-                      <label>Категория:</label>
+                      <label>Category:</label>
                       <select
                         name="category_id"
                         value={quickAddData.category_id}
                         onChange={handleQuickAddChange}
                         required
                       >
-                        <option value="">Выберите категорию</option>
+                        <option value="">Select Category</option>
                         {categories.map(category => (
                           <option key={category.id} value={category.id}>
                             {category.name}
@@ -201,7 +211,7 @@ function Dashboard({ onLogout }) {
                     </div>
                   </div>
                   <div className="form-group">
-                    <label>Описание:</label>
+                    <label>Description:</label>
                     <input
                       type="text"
                       name="description"
@@ -213,10 +223,10 @@ function Dashboard({ onLogout }) {
                   {quickAddError && <div className="error">{quickAddError}</div>}
                   <div className="form-actions">
                     <button type="submit" disabled={quickAddLoading}>
-                      {quickAddLoading ? 'Добавление...' : 'Добавить'}
+                      {quickAddLoading ? 'Adding...' : 'Add'}
                     </button>
                     <button type="button" onClick={cancelQuickAdd} className="cancel-btn">
-                      Отмена
+                      Cancel
                     </button>
                   </div>
                 </form>
@@ -225,19 +235,19 @@ function Dashboard({ onLogout }) {
 
             <div className="stats-grid">
               <div className="stat-card">
-                <h3>Всего транзакций</h3>
+                <h3>Total Transactions</h3>
                 <p>{transactions.length}</p>
               </div>
               <div className="stat-card">
-                <h3>Общий доход</h3>
+                <h3>Total Income</h3>
                 <p>${transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0).toFixed(2)}</p>
               </div>
               <div className="stat-card">
-                <h3>Общие расходы</h3>
+                <h3>Total Expenses</h3>
                 <p>${transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0).toFixed(2)}</p>
               </div>
               <div className="stat-card">
-                <h3>Категории</h3>
+                <h3>Categories</h3>
                 <p>{categories.length}</p>
               </div>
             </div>
