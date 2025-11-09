@@ -737,13 +737,7 @@ SOFTWARE.
 - [SQLAlchemy](https://www.sqlalchemy.org/) - Excellent ORM
 - All our [contributors](https://github.com/atyakshev0405-star/Personal-Finance-Dashboard/graphs/contributors)
 
----
 
-## ⭐ Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=atyakshev0405-star/Personal-Finance-Dashboard&type=Date)](https://star-history.com/#atyakshev0405-star/Personal-Finance-Dashboard&Date)
-
----
 
 <div align="center">
 
